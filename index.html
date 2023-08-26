@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>make a joke</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: blueviolet;
+
+        }
+
+        .container {
+            background-color: blueviolet;
+            flex-direction: column;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h2 {
+            font-size: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .joke {
+            color: rgb(57, 0, 57);
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 900;
+            font-size: 35px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: rgb(226, 4, 255);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 99px;
+            cursor: pointer;
+            border: 2px white solid;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>😂Jokester's Paradise😂</h2>
+        <div class="joke" id="joke"><b>laugh......</b></div>
+        <button id=" nextBtn" class="btn">Next joke</button>
+    </div>
+
+
+
+    <script>
+        const jokes = document.querySelector('.joke');
+        const nextBtn = document.querySelector('.btn');
+        //-----------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------
+        //fetching data from API and using promises then and catch
+        // const generateJoke = () => {
+
+        //     const setHeader = {
+        //         headers: {
+        //             Accept: "application/json"
+        //         }
+        //     }
+        //     fetch('https://icanhazdadjoke.com', setHeader)
+        //         .then((res) => res.json())
+        //         .then((data) =>
+        //             jokes.innerHTML = data.joke)
+        //         .catch((error) => { console.log(error) })
+        // }
+        //-----------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------
+
+        //using async-await with error handling 
+        const generateJoke = async () => {
+
+            try {
+                const setHeader = {
+                    headers: {
+                        Accept: "application/json"
+                    }
+                }
+                const res = await fetch('https://icanhazdadjoke.com', setHeader)
+                const data = await res.json()
+                jokes.innerHTML = data.joke
+            } catch (err) {
+                console.log(`err ${err}`)
+
+            }
+
+
+        }
+        nextBtn.addEventListener('click', generateJoke)
+        generateJoke();
+    </script>
+</body>
+
+</html>
